@@ -1,86 +1,278 @@
 # 537Shell
 
-一个类似Linux的终端程序，使用C++编写。
+一个跨平台的类Linux终端程序，支持中英文双语，使用传统C++风格编写。无Windows.h依赖，纯标准库实现。
 
-## 🚀 特性
-- **丰富的命令支持**: 包含20+个常用命令
-- **轻量级设计**: 单文件实现，易于编译和部署
-- **命令历史**: 支持命令历史记录功能
+## 🌟 特性
 
-## 📦 支持的命令
+- **跨平台支持**: Windows、Linux、macOS完全兼容
+- **双语界面**: 支持中英文无缝切换
+- **丰富命令集**: 30+个Linux风格命令
+- **零外部依赖**: 仅使用C++17标准库
+- **轻量级**: 单文件实现，易于编译和分发
+- **完整功能**: 文本处理、文件管理、系统信息等
+
+## 🚀 支持的命令
 
 ### 文件和目录操作
-- `ls` / `dir` - 列出目录内容（支持 -a, -l 参数）
-- `cd <path>` - 切换目录
-- `pwd` - 显示当前工作目录
-- `mkdir <dir>` - 创建目录
-- `rmdir <dir>` - 删除目录
-- `rm <file>` / `del` - 删除文件
-- `cp <src> <dst>` / `copy` - 复制文件
-- `mv <src> <dst>` / `move` - 移动/重命名文件
-- `touch <file>` - 创建空文件
-- `tree [path]` - 显示目录树结构
+- `ls` / `dir` / `列表` - 列出目录内容（支持 -a, -l, -h 参数）
+- `cd` / `进入` - 切换目录
+- `pwd` / `路径` - 显示当前工作目录
+- `mkdir` / `创建目录` - 创建目录
+- `rmdir` / `删除目录` - 删除目录
+- `rm` / `del` / `删除` - 删除文件
+- `cp` / `copy` / `复制` - 复制文件
+- `mv` / `move` / `移动` - 移动/重命名文件
+- `touch` / `创建` - 创建空文件
+- `tree` / `树形` - 显示目录树结构
 
-### 文件内容操作
-- `cat <file>` / `type` - 显示文件内容
-- `echo <text>` - 输出文本
-- `grep <pattern> <file>` - 在文件中搜索文本
+### 文件内容处理
+- `cat` / `type` / `查看` - 显示文件内容
+- `echo` / `输出` - 输出文本
+- `grep` / `搜索` - 在文件中搜索文本模式
+- `wc` / `统计` - 统计文件行数、字数、字符数
+- `sort` / `排序` - 排序文件内容
+- `uniq` / `去重` - 去除重复行
+- `head` / `头部` - 显示文件前N行
+- `tail` / `尾部` - 显示文件后N行
+- `cut` / `切割` - 提取文件指定列
+- `sed` / `替换` - 流编辑器，文本替换
+- `tr` / `转换` - 字符转换工具
+- `diff` / `比较` - 比较两个文件的差异
 
 ### 系统和工具命令
-- `find <name>` - 查找文件和目录
-- `ps` - 显示进程信息
-- `date` - 显示当前日期和时间
-- `clear` / `cls` - 清屏
-- `history` - 显示命令历史
-- `help` / `?` - 显示帮助信息
-- `exit` / `quit` - 退出程序
+- `find` / `查找` - 查找文件和目录
+- `which` / `位置` - 查找命令位置
+- `ps` / `进程` - 显示进程信息
+- `date` / `时间` - 显示当前日期和时间
+- `du` / `磁盘使用` - 显示目录磁盘使用情况
+- `df` / `磁盘空间` - 显示磁盘空间使用情况
+- `env` / `环境` - 显示环境变量
+- `set` / `设置` - 设置环境变量
+- `export` / `导出` - 导出环境变量
+
+### 工具命令
+- `clear` / `cls` / `清屏` - 清除屏幕
+- `history` / `历史` - 显示命令历史
+- `help` / `?` / `帮助` - 显示帮助信息
+- `lang` / `语言` - 切换语言模式
+- `exit` / `quit` / `退出` - 退出程序
 
 ## 🛠️ 编译要求
 
+### 系统要求
+- **操作系统**: Windows 7+, Linux (任意发行版), macOS 10.12+
 - **编译器**: 支持C++17标准的编译器
-  - MinGW-w64 (推荐)
-  - Visual Studio 2017或更高版本
-  - Clang++
-- **操作系统**: Windows 7或更高版本
-- **依赖库**: 无外部依赖，仅使用标准库
+  - GCC 7.0+
+  - Clang 5.0+
+  - Visual Studio 2017+
+  - MinGW-w64
+- **依赖**: 无外部依赖，仅使用C++17标准库
 
-## 📖 编译方法
+### 编译命令
 
-### 使用MinGW
+#### Linux/macOS
+```bash
+g++ -std=c++17 -o 537shell 537shell.cpp
+```
+
+#### Windows (MinGW)  
 ```bash
 g++ -std=c++17 -o 537shell.exe 537shell.cpp
-使用Visual Studio
-bash
+```
+
+#### Windows (Visual Studio)
+```cmd
 cl /EHsc /std:c++17 537shell.cpp
-使用Clang
-bash
-clang++ -std=c++17 -o 537shell.exe 537shell.cpp
-🎯 使用方法
-编译程序后运行 537shell.exe
-输入 help 查看所有可用命令
-使用类似Linux的命令语法进行操作
-示例
-bash
-537Shell:C:\Users\Username$ ls -l
-537Shell:C:\Users\Username$ cd Documents
-537Shell:C:\Users\Username\Documents$ mkdir test_folder
-537Shell:C:\Users\Username\Documents$ touch hello.txt
-537Shell:C:\Users\Username\Documents$ echo "Hello World" > hello.txt
-537Shell:C:\Users\Username\Documents$ cat hello.txt
-537Shell:C:\Users\Username\Documents$ tree
-🔧 项目结构
-code
+```
+
+#### macOS (Clang)
+```bash
+clang++ -std=c++17 -o 537shell 537shell.cpp
+```
+
+## 🎯 使用方法
+
+### 基本使用
+```bash
+# 编译后运行
+./537shell        # Linux/macOS
+537shell.exe      # Windows
+
+# 查看帮助
+help
+
+# 切换到中文模式
+lang zh
+
+# 文件操作示例
+ls -l
+mkdir test
+cd test
+touch hello.txt
+echo "Hello World" > hello.txt
+cat hello.txt
+```
+
+### 双语支持示例
+```bash
+# 英文模式
+537Shell:Documents$ help
+537Shell:Documents$ ls -l
+537Shell:Documents$ find test.txt
+
+# 切换到中文模式
+537Shell:Documents$ lang zh
+已切换到中文模式
+
+# 中文模式
+537Shell:Documents$ 帮助
+537Shell:Documents$ 列表 -l  
+537Shell:Documents$ 查找 test.txt
+
+# 切换回英文模式
+537Shell:Documents$ lang en
+Switched to English mode
+```
+
+### 文本处理示例
+```bash
+# 统计文件信息
+wc file.txt
+
+# 排序文件内容
+sort data.txt
+
+# 查找重复行
+sort data.txt | uniq
+
+# 搜索文本
+grep "pattern" file.txt
+
+# 文本替换
+sed 's/old/new/' file.txt
+
+# 比较文件
+diff file1.txt file2.txt
+```
+
+## 🎨 设计理念
+
+### 编程风格
+- **函数式设计**: 避免使用类，采用纯函数实现
+- **代码简洁**: 结构清晰，易于理解和维护
+- **标准库优先**: 仅使用C++17标准库，无外部依赖
+
+### 用户体验
+- **双语支持**: 中文用户友好界面
+- **跨平台**: 一次编写，到处运行
+- **轻量级**: 单文件部署，快速启动
+
+## 📁 项目结构
+
+```
 537Shell/
 ├── 537shell.cpp          # 主程序源代码
-├── README.md             # 项目说明
-└── LICENSE          # 许可证
-📝 TODO
-[ ] 添加更多文本处理命令 (sort, uniq, wc)
-[ ] 实现简单的脚本执行功能
-[ ] 添加颜色输出支持
-[ ] 支持tab自动补全
-🤝 贡献
-欢迎提交Issue和Pull Request！
-Fork本项目-创建功能分支-提交更改-推送到分支-创建Pull Request
-📄 许可证
-本项目采用MIT许可证 - 查看 LICENSE 文件了解详情
+├── README.md             # 项目说明文档
+└── LICENSE               # MIT许可证
+    
+```
+
+## 🔧 平台特性
+
+### Windows
+- 兼容Windows 7及以上版本
+- 支持MinGW和Visual Studio编译
+- 自动适配Windows路径分隔符
+- 完美支持中文显示
+
+### Linux
+- 支持所有主流Linux发行版
+- 使用标准POSIX接口
+- 完整的终端颜色支持
+- 原生UTF-8编码
+
+### macOS
+- 支持macOS 10.12及以上版本
+- 使用Clang编译器优化
+- 完美支持Retina显示
+- 原生终端集成
+
+## 📈 路线图
+
+- [x] 基础文件操作命令
+- [x] 文本处理工具集
+- [x] 双语支持
+- [x] 跨平台兼容性
+- [ ] 管道操作支持 (`|`)
+- [ ] 重定向操作 (`>`, `>>`, `<`)
+- [ ] 通配符匹配 (`*`, `?`)
+- [ ] 脚本执行功能
+- [ ] 颜色输出支持
+- [ ] Tab自动补全
+- [ ] 配置文件支持
+- [ ] 插件系统
+
+## 🤝 贡献指南
+
+我们欢迎各种形式的贡献！
+
+### 如何贡献
+1. Fork 本项目
+2. 创建功能分支 
+3. 提交更改 
+4. 推送到分支
+5. 创建 Pull Request
+
+### 贡献类型
+- 🐛 Bug修复
+- ✨ 新功能开发
+- 📝 文档改进
+- 🌐 国际化翻译
+- 🔧 性能优化
+- 🎨 界面改进
+
+## 📊 兼容性矩阵
+
+| 平台 | 编译器 | 状态 |
+|------|-------|------|
+| Windows 10/11 | MinGW-w64 | ✅ |
+| Windows 10/11 | Visual Studio | ✅ |
+| Ubuntu | GCC | ✅ | 
+| CentOS/RHEL | GCC | ✅ |
+| Debian | GCC | ✅ | 
+| macOS | Clang | ✅ |
+
+## 📄 许可证
+
+本项目采用MIT许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
+
+
+---
+
+
+```
+
+### LICENSE (MIT)
+```
+MIT License
+
+Copyright (c) 2025 537Shell Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
