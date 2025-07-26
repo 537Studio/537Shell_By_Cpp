@@ -37,42 +37,27 @@ void execute_command(const vector<string>& args);
 void init_locale();
 string to_utf8(const string& str);
 
-// 命令函数声明
-void cmd_help();
-void cmd_ls(const vector<string>& args);
-void cmd_cd(const vector<string>& args);
-void cmd_pwd();
-void cmd_mkdir(const vector<string>& args);
-void cmd_rmdir(const vector<string>& args);
-void cmd_rm(const vector<string>& args);
-void cmd_cp(const vector<string>& args);
-void cmd_mv(const vector<string>& args);
-void cmd_cat(const vector<string>& args);
-void cmd_echo(const vector<string>& args);
-void cmd_find(const vector<string>& args);
-void cmd_grep(const vector<string>& args);
-void cmd_ps();
-void cmd_date();
-void cmd_clear();
-void cmd_history();
-void cmd_touch(const vector<string>& args);
-void cmd_tree(const vector<string>& args);
-void cmd_wc(const vector<string>& args);
-void cmd_sort(const vector<string>& args);
-void cmd_uniq(const vector<string>& args);
-void cmd_head(const vector<string>& args);
-void cmd_tail(const vector<string>& args);
-void cmd_cut(const vector<string>& args);
-void cmd_sed(const vector<string>& args);
-void cmd_tr(const vector<string>& args);
-void cmd_which(const vector<string>& args);
-void cmd_env();
-void cmd_set(const vector<string>& args);
-void cmd_export(const vector<string>& args);
-void cmd_diff(const vector<string>& args);
-void cmd_du(const vector<string>& args);
-void cmd_df();
-void cmd_lang(const vector<string>& args);
+//函数声明宏
+#define COMM(name) void name(const vector<string>& args)
+
+COMM(cmd_help); COMM(cmd_ls); 
+COMM(cmd_cd);   COMM(cmd_pwd); 
+COMM(cmd_mkdir); COMM(cmd_rmdir);
+COMM(cmd_rm); COMM(cmd_cp); 
+COMM(cmd_mv); COMM(cmd_cat);
+COMM(cmd_echo); COMM(cmd_find);
+COMM(cmd_grep); COMM(cmd_ps);
+COMM(cmd_date); COMM(cmd_clear);
+COMM(cmd_history); COMM(cmd_touch);
+COMM(cmd_tree); COMM(cmd_wc);
+COMM(cmd_sort); COMM(cmd_uniq);
+COMM(cmd_head); COMM(cmd_tail);
+COMM(cmd_cut); COMM(cmd_sed);
+COMM(cmd_tr); COMM(cmd_which);
+COMM(cmd_env); COMM(cmd_set);
+COMM(cmd_export); COMM(cmd_diff);
+COMM(cmd_du); COMM(cmd_df);
+COMM(cmd_lang);
 
 // 工具函数实现
 void init_locale() {
@@ -146,97 +131,60 @@ void print_prompt() {
     cout << "537Shell:" << fs::current_path().filename().string() << prompt_symbol;
 }
 
-void execute_command(const vector<string>& args) {
-    if (args.empty()) return;
-    
-    string cmd = args[0];
-    
-    if (cmd == "help" || cmd == "?" || cmd == "帮助") {
-        cmd_help();
-    } else if (cmd == "ls" || cmd == "dir" || cmd == "列表") {
-        cmd_ls(args);
-    } else if (cmd == "cd" || cmd == "进入") {
-        cmd_cd(args);
-    } else if (cmd == "pwd" || cmd == "路径") {
-        cmd_pwd();
-    } else if (cmd == "mkdir" || cmd == "创建目录") {
-        cmd_mkdir(args);
-    } else if (cmd == "rmdir" || cmd == "删除目录") {
-        cmd_rmdir(args);
-    } else if (cmd == "rm" || cmd == "del" || cmd == "删除") {
-        cmd_rm(args);
-    } else if (cmd == "cp" || cmd == "copy" || cmd == "复制") {
-        cmd_cp(args);
-    } else if (cmd == "mv" || cmd == "move" || cmd == "移动") {
-        cmd_mv(args);
-    } else if (cmd == "cat" || cmd == "type" || cmd == "查看") {
-        cmd_cat(args);
-    } else if (cmd == "echo" || cmd == "输出") {
-        cmd_echo(args);
-    } else if (cmd == "find" || cmd == "查找") {
-        cmd_find(args);
-    } else if (cmd == "grep" || cmd == "搜索") {
-        cmd_grep(args);
-    } else if (cmd == "ps" || cmd == "进程") {
-        cmd_ps();
-    } else if (cmd == "date" || cmd == "时间") {
-        cmd_date();
-    } else if (cmd == "clear" || cmd == "cls" || cmd == "清屏") {
-        cmd_clear();
-    } else if (cmd == "history" || cmd == "历史") {
-        cmd_history();
-    } else if (cmd == "touch" || cmd == "创建") {
-        cmd_touch(args);
-    } else if (cmd == "tree" || cmd == "树形") {
-        cmd_tree(args);
-    } else if (cmd == "wc" || cmd == "统计") {
-        cmd_wc(args);
-    } else if (cmd == "sort" || cmd == "排序") {
-        cmd_sort(args);
-    } else if (cmd == "uniq" || cmd == "去重") {
-        cmd_uniq(args);
-    } else if (cmd == "head" || cmd == "头部") {
-        cmd_head(args);
-    } else if (cmd == "tail" || cmd == "尾部") {
-        cmd_tail(args);
-    } else if (cmd == "cut" || cmd == "切割") {
-        cmd_cut(args);
-    } else if (cmd == "sed" || cmd == "替换") {
-        cmd_sed(args);
-    } else if (cmd == "tr" || cmd == "转换") {
-        cmd_tr(args);
-    } else if (cmd == "which" || cmd == "位置") {
-        cmd_which(args);
-    } else if (cmd == "env" || cmd == "环境") {
-        cmd_env();
-    } else if (cmd == "set" || cmd == "设置") {
-        cmd_set(args);
-    } else if (cmd == "export" || cmd == "导出") {
-        cmd_export(args);
-    } else if (cmd == "diff" || cmd == "比较") {
-        cmd_diff(args);
-    } else if (cmd == "du" || cmd == "磁盘使用") {
-        cmd_du(args);
-    } else if (cmd == "df" || cmd == "磁盘空间") {
-        cmd_df();
-    } else if (cmd == "lang" || cmd == "语言") {
-        cmd_lang(args);
-    } else if (cmd == "exit" || cmd == "quit" || cmd == "退出") {
-        cout << (chinese_mode ? "再见！" : "Goodbye!") << endl;
-        exit(0);
-    } else {
-        if (chinese_mode) {
-            cout << "537Shell: 未找到命令: " << cmd << endl;
-            cout << "输入 '帮助' 查看可用命令。" << endl;
-        } else {
-            cout << "537Shell: command not found: " << cmd << endl;
-            cout << "Type 'help' for available commands." << endl;
-        }
+// 命令函数指针类型
+using CommandFunction = void (*)(const vector<string>&);
+
+// 命令映射表
+unordered_map<string, CommandFunction> command_map;
+
+// 批量添加命令别名
+void add_command_aliases(CommandFunction func, const vector<string>& aliases) {
+    for (const string& alias : aliases) {
+        command_map[alias] = func;
     }
 }
 
+// 初始化命令映射表
+void init_command_map() {
+    add_command_aliases(cmd_help, {"help", "?", "帮助"});
+    add_command_aliases(cmd_ls, {"ls", "dir", "列表"});
+    add_command_aliases(cmd_cd, {"cd", "进入"});
+    add_command_aliases(cmd_pwd, {"pwd", "路径"});
+    add_command_aliases(cmd_mkdir, {"mkdir", "创建目录"});
+    add_command_aliases(cmd_rmdir, {"rmdir", "删除目录"});
+    add_command_aliases(cmd_rm, {"rm", "del", "删除"});
+    add_command_aliases(cmd_cp, {"cp", "copy", "复制"});
+    add_command_aliases(cmd_mv, {"mv", "move", "移动"});
+    add_command_aliases(cmd_cat, {"cat", "type", "查看"});
+    add_command_aliases(cmd_echo, {"echo", "输出"});
+    add_command_aliases(cmd_find, {"find", "查找"});
+    add_command_aliases(cmd_grep, {"grep", "搜索"});
+    add_command_aliases(cmd_ps, {"ps", "进程"});
+    add_command_aliases(cmd_date, {"date", "时间"});
+    add_command_aliases(cmd_clear, {"clear", "cls", "清屏"});
+    add_command_aliases(cmd_history, {"history", "历史"});
+    add_command_aliases(cmd_touch, {"touch", "创建"});
+    add_command_aliases(cmd_tree, {"tree", "树形"});
+    add_command_aliases(cmd_wc, {"wc", "统计"});
+    add_command_aliases(cmd_sort, {"sort", "排序"});
+    add_command_aliases(cmd_uniq, {"uniq", "去重"});
+    add_command_aliases(cmd_head, {"head", "头部"});
+    add_command_aliases(cmd_tail, {"tail", "尾部"});
+    add_command_aliases(cmd_cut, {"cut", "切割"});
+    add_command_aliases(cmd_sed, {"sed", "替换"});
+    add_command_aliases(cmd_tr, {"tr", "转换"});
+    add_command_aliases(cmd_which, {"which", "位置"});
+    add_command_aliases(cmd_env, {"env", "环境"});
+    add_command_aliases(cmd_set, {"set", "设置"});
+    add_command_aliases(cmd_export, {"export", "导出"});
+    add_command_aliases(cmd_diff, {"diff", "比较"});
+    add_command_aliases(cmd_du, {"du", "磁盘使用"});
+    add_command_aliases(cmd_df, {"df", "磁盘空间"});
+    add_command_aliases(cmd_lang, {"lang", "语言"});
+}
+
 // 命令实现
-void cmd_help() {
+void cmd_help([[maybe_unused]] const vector<string>& args) {
     if (chinese_mode) {
         cout << "537Shell - 可用命令:" << endl;
         cout << "  帮助, help           - 显示此帮助信息" << endl;
@@ -397,7 +345,7 @@ void cmd_cd(const vector<string>& args) {
     }
 }
 
-void cmd_pwd() {
+void cmd_pwd([[maybe_unused]] const vector<string>& args) {
     cout << fs::current_path().string() << endl;
 }
 
@@ -553,7 +501,7 @@ void cmd_grep(const vector<string>& args) {
     file.close();
 }
 
-void cmd_ps() {
+void cmd_ps([[maybe_unused]] const vector<string>& args) {
     if (chinese_mode) {
         cout << "PID  PPID 命令" << endl;
         cout << "1    0    537Shell" << endl;
@@ -563,11 +511,11 @@ void cmd_ps() {
     }
 }
 
-void cmd_date() {
+void cmd_date([[maybe_unused]] const vector<string>& args) {
     cout << get_current_time() << endl;
 }
 
-void cmd_clear() {
+void cmd_clear([[maybe_unused]] const vector<string>& args) {
 #ifdef _WIN32
     system("cls");
 #else
@@ -575,7 +523,7 @@ void cmd_clear() {
 #endif
 }
 
-void cmd_history() {
+void cmd_history([[maybe_unused]] const vector<string>& args) {
     for (size_t i = 0; i < command_history.size(); ++i) {
         cout << i + 1 << "  " << command_history[i] << endl;
     }
@@ -886,7 +834,7 @@ void cmd_which(const vector<string>& args) {
     }
 }
 
-void cmd_env() {
+void cmd_env([[maybe_unused]] const vector<string>& args) {
     for (const auto& pair : environment_vars) {
         cout << pair.first << "=" << pair.second << endl;
     }
@@ -894,7 +842,7 @@ void cmd_env() {
 
 void cmd_set(const vector<string>& args) {
     if (args.size() < 2) {
-        cmd_env();
+        cmd_env({});
         return;
     }
     
@@ -1020,7 +968,7 @@ void cmd_du(const vector<string>& args) {
     }
 }
 
-void cmd_df() {
+void cmd_df([[maybe_unused]] const vector<string>& args) {
     try {
         fs::space_info space = fs::space(".");
         
@@ -1066,9 +1014,25 @@ void cmd_lang(const vector<string>& args) {
     }
 }
 
-// 主函数
+void execute_command(const vector<string>& args) {
+    if (args.empty()) return;
+    
+    string cmd = args[0];
+    
+    auto it = command_map.find(cmd);
+    if (it != command_map.end()) {
+        it->second(args);
+    } else {
+        if (chinese_mode)
+            cout << "537Shell: 未找到命令: " << cmd << endl << "输入 '帮助' 查看可用命令。" << endl;
+        else
+            cout << "537Shell: command not found: " << cmd << endl << "Type 'help' for available commands." << endl;
+    }
+}
+
 int main() {
     init_locale();
+    init_command_map(); // 初始化命令映射表
     
     cout << "537Shell v2.0"<< endl;
     cout << (chinese_mode ? "输入 '帮助' 查看可用命令。" : "Type 'help' for available commands.") << endl;
@@ -1098,6 +1062,5 @@ int main() {
             execute_command(args);
         }
     }
-    
     return 0;
 }
